@@ -132,7 +132,7 @@ if (upload){
           name: widget.designer.name,
           race: widget.designer.race,
         },
-        imageUrl: `https://storage.googleapis.com/smpbck-01/w${count}.svg` 
+        imageUrl: `https://storage.googleapis.com/${CLOUD_BUCKET}/w${count}.svg` 
       }
       ++count;
       getModel().create(data, (err, savedData) => {

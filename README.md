@@ -4,7 +4,7 @@ This app is currently hosted [here](),  but if you did wish to run this app loca
 
 - You will need a google cloud account, and install the gcloud sdk.
 
-- Then create an empty project.
+- Then create an empty project and create an empty datastore.
 
 - From your app folder root, run the following command to obtain authorization:
 ```
@@ -45,3 +45,11 @@ Your app should be running at http://localhost:8080
 
     PORT: 8080,
 ```
+
+# Uploading the data to the datastore
+in the app.js file there is a variable
+```js
+let upload = false;//set to true to run the upload method for the json data
+```
+It is set to false by default. If you wish to do a one time upload of the json data, make it true.
+> Note: this upload assumed the graphics are uploaded to your bucket.

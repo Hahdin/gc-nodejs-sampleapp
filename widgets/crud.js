@@ -63,7 +63,6 @@ router.get('/:widget', (req, res, next) => {
       next(err);
       return;
     }
-    console.log('here')
     res.render('widgets/view.pug', {
       widget: entity,
       //currentUserId: req.user.id,
