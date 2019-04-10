@@ -1,0 +1,47 @@
+//- Copyright 2019, Blacktoque Software.
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+
+extends ../base.pug
+
+block content
+  
+  div.jumbotron.mybackground
+    div.container
+      h3.h_extra Welcome to Widgets!
+      hr
+      p Find them all here.
+
+  div.carousel.slide(data-ride='carousel', id='theshow')
+    ul.carousel-indicators
+      li.active.bg-dark(data-target='#theshow', data-slide-to='0')
+      li.active.bg-dark(data-target='#theshow', data-slide-to='1')
+      li.active.bg-dark(data-target='#theshow', data-slide-to='2')
+    div.carousel-inner
+      div.active.carousel-item
+        h3 Visit the Selection... 
+        a.cleanlink(href=`/widgets`)
+          img(src='https://storage.googleapis.com/smpbck-01/w1.svg' )
+      div.carousel-item 
+        h3 Browse them all... 
+        a.cleanlink(href=`/widgets`)
+          img(src='https://storage.googleapis.com/smpbck-01/w2.svg' )
+      div.carousel-item 
+        h3 Upload your own (TODO) 
+        a.cleanlink(href=`/widgets`)
+          img(src='https://storage.googleapis.com/smpbck-01/w3.svg' )
+    a.carousel-control-prev(href='#theshow', data-slide='prev', id='prev_button')
+      span.carousel-control-prev-icon.bg-dark
+    a.carousel-control-next(href='#theshow', data-slide='next',  id='next_button')
+      span.carousel-control-next-icon.bg-dark
+      
+      
