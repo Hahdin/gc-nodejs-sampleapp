@@ -1,4 +1,5 @@
 # [Widgets](https://sampleapp-nodejs.appspot.com/)
+This is just a small sample app deployed to the Google Cloud App Engine. It uses the GC Datastore (NoSQL) Database, and integrates OAuth2 login to Google.
 
 ## Installing this app locally
 
