@@ -125,7 +125,7 @@ if (upload){
         model:{
           id: widget.model.id,
           type: widget.model.type,
-          img: 'w1.png',
+          img: `w${count}.svg`,
           description: widget.model.description,
         },
         designer:{
