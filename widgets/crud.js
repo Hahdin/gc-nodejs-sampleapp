@@ -51,6 +51,103 @@ router.get('/', (req, res, next) => {
     });
   });
 });
+/**
+ * GET /widgets/upload
+ *
+ * Display a form for uploading a widget.
+ */
+router.get('/upload',oauth2.required, (req, res) => {
+  res.render('widgets/form.pug', {
+    user: req.user,
+    widget: {
+      item: {
+        name: ''
+      },
+      model: {
+        id: '',
+        type: '',
+        img: '',
+        description: ''
+      },
+      designer: {
+        name: '',
+        race: ''
+      },
+      name:{
+        first: '',
+        last: '',
+      }
+    },
+    action: 'Upload Form',
+  });
+});
+/**
+ * POST /widgets/upload
+ *
+ * Create a widget.
+ */
+// [START upload]
+router.post(
+  '/upload',
+  images.multer.single('image'),
+  images.sendUploadToGCS,
+  (req, res, next) => {
+    const data = req.body;
+
+    // If the user is logged in, set them as the creator of the book.
+    if (req.user) {
+      data.createdBy = req.user.displayName;
+      data.createdById = req.user.id;
+    } else { ;//bail
+      next(err);
+      return;
+    }
+    // Was an image uploaded? If so, we'll use its public URL
+    // in cloud storage.
+    if (req.file && req.file.cloudStoragePublicUrl) {
+      data.imageUrl = req.file.cloudStoragePublicUrl;
+    }
+    let time = new Date();
+    let orderFormData = {
+      uploader: {
+        name: {
+          first: data.firstname,
+          last: data.lastname,
+        },
+      },
+      date: time.toISOString(),
+      item:{
+        name: data.itemName,
+      },
+      model:{
+        id: data.modelId,
+        type: data.modelType,
+        description: data.modelDesc,
+        img: data.imageUrl,
+      },
+      designer: {
+        name: data.designerName,
+        race: data.designerRace,
+      },
+      createdById: data.createdById,
+      imageUrl: data.imageUrl,
+    }
+    
+
+
+    // Save the data to the database.
+    getModel().create(orderFormData, (err, savedData) => {
+      if (err) {
+        if (typeof err === 'string') {
+          res.redirect(`${req.baseUrl}`);
+          return
+        }
+        next(err); return;
+      }
+      res.redirect(`${req.baseUrl}/${savedData.id}`);
+    });
+  }
+);
 
 /**
  * GET /widget/:id

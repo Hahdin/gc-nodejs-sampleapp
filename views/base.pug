@@ -91,6 +91,11 @@ html(lang="en")
             a.nav-link(href="/home") Home
           li.nav-item 
             a.nav-link(href="/widgets") Widgets
+          li.nav-item 
+            if profile
+              a.nav-link(href="/widgets/upload") Upload your own
+            else
+              p 
 
       p.navbar-text.navbar-right
         // [START profile]
