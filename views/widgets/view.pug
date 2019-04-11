@@ -16,6 +16,10 @@ extends ../base.pug
 block content
   h3.titles Widget
     small
+  .btn-group
+    if currentUserId == widget.createdById
+      a(href=`/widgets/${widget.id}/delete`, class='btn btn-danger btn-sm')
+        span  Delete
   div.row.titles
     div.col.min_size
       img(src=widget.imageUrl id='wImg')

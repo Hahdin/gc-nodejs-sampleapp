@@ -148,13 +148,28 @@ router.post(
     });
   }
 );
+/**
+ * GET /widgets/:id/delete
+ *
+ * Delete a widget.
+ */
+router.get('/:widget/delete', (req, res, next) => {
+  getModel().delete(req.params.widget, err => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.redirect(`${req.baseUrl}`);
+  });
+});
 
 /**
  * GET /widget/:id
  *
- * Display an widget.
+ * Display a widget.
  */
 router.get('/:widget', (req, res, next) => {
+  
   getModel().read(req.params.widget, (err, entity) => {
     if (err) {
       next(err);
@@ -162,7 +177,7 @@ router.get('/:widget', (req, res, next) => {
     }
     res.render('widgets/view.pug', {
       widget: entity,
-      //currentUserId: req.user.id,
+      currentUserId: req.user ? req.user.id : 'none',
     });
   });
 });
