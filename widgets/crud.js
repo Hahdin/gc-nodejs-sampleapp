@@ -94,7 +94,7 @@ router.post(
   (req, res, next) => {
     const data = req.body;
 
-    // If the user is logged in, set them as the creator of the book.
+    // If the user is logged in, set them as the creator.
     if (req.user) {
       data.createdBy = req.user.displayName;
       data.createdById = req.user.id;
